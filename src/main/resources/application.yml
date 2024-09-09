@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/book
+    username: book
+    password: book
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  flyway:
+    url: jdbc:mysql://localhost:3306/book
+    user: book
+    password: book
+    schemas: book
+    baseline-on-migrate: true
+
+
+
+
+
+
