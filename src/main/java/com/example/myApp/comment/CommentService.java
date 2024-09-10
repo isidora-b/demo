@@ -1,9 +1,13 @@
 package com.example.myApp.comment;
 
+import com.example.myApp.book.BookModel;
+import com.example.myApp.book.BookRepository;
+import com.example.myApp.book.dto.BookDto;
 import com.example.myApp.comment.CommentModel;
 import com.example.myApp.comment.CommentRepository;
 import com.example.myApp.comment.dto.CommentDto;
 import com.example.myApp.comment.dto.CommentMapper;
+import com.example.myApp.exceptionHandler.BookNotFoundException;
 import com.example.myApp.exceptionHandler.CommentNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final BookRepository bookRepository;
     private final CommentMapper commentMapper;
 
     public List<CommentDto> getComments () {
@@ -24,7 +29,9 @@ public class CommentService {
         return commentMapper.commentToCommentDto(commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("There is no comment with id=" + id)));
     }
 
-    public CommentDto createComment (CommentDto commentDto) {
+    public CommentDto createComment (CommentDto commentDto, Long bookId) {
+        BookModel book = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("There is no book with id=" + bookId));
+        commentDto.setBook(book);
         commentRepository.save(commentMapper.commentDtoToComment(commentDto));
         return commentDto;
     }
