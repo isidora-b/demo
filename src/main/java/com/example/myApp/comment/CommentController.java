@@ -19,22 +19,22 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public CommentDto getComment (@PathVariable Long id) {
+    public CommentDto getComment (@PathVariable String id) {
         return commentService.getComment(id);
     }
 
     @PostMapping
-    public CommentDto createComment (@RequestBody CommentDto commentDto, Long bookId) {
+    public CommentDto createComment (@RequestBody CommentDto commentDto, String bookId) {
         return commentService.createComment(commentDto, bookId);
     }
 
     @PutMapping("/{id}")
-    public CommentDto updateComment (@RequestBody CommentDto updatedCommentDto,@PathVariable Long id) {
+    public CommentDto updateComment (@RequestBody CommentDto updatedCommentDto,@PathVariable String id) {
         return commentService.updateComment(updatedCommentDto, id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete (@PathVariable Long id) {
+    public void delete (@PathVariable String id) {
         commentService.deleteComment(id);
     }
 }

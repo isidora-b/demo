@@ -25,18 +25,18 @@ public class CommentService {
         return commentMapper.commentsToCommentDtos(commentRepository.findAll());
     }
 
-    public CommentDto getComment (Long id) {
+    public CommentDto getComment (String id) {
         return commentMapper.commentToCommentDto(commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("There is no comment with id=" + id)));
     }
 
-    public CommentDto createComment (CommentDto commentDto, Long bookId) {
+    public CommentDto createComment (CommentDto commentDto, String bookId) {
         BookModel book = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("There is no book with id=" + bookId));
         commentDto.setBook(book);
         commentRepository.save(commentMapper.commentDtoToComment(commentDto));
         return commentDto;
     }
 
-    public CommentDto updateComment (CommentDto updatedCommentDto, Long id) {
+    public CommentDto updateComment (CommentDto updatedCommentDto, String id) {
         CommentModel comment = commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("There is no comment with id=" + id));
         comment.setContent(updatedCommentDto.getContent());
         comment.setBook(updatedCommentDto.getBook());
@@ -44,7 +44,7 @@ public class CommentService {
         return commentMapper.commentToCommentDto(comment);
     }
 
-    public void deleteComment(Long id) {
+    public void deleteComment(String id) {
         CommentModel comment = commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("There is no comment with id=" + id));
         commentRepository.delete(comment);
     }

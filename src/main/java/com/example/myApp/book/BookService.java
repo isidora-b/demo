@@ -17,7 +17,7 @@ public class BookService {
         return bookMapper.booksToBookDtos(bookRepository.findAll());
     }
 
-    public BookDto getBook (Long id) {
+    public BookDto getBook (String id) {
         return bookMapper.bookToBookDto(bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("There is no book with id=" + id)));
     }
 
@@ -26,7 +26,7 @@ public class BookService {
         return bookDto;
     }
 
-    public BookDto updateBook (BookDto updatedBookDto, Long id) {
+    public BookDto updateBook (BookDto updatedBookDto, String id) {
         BookModel book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("There is no book with id=" + id));
         book.setTitle(updatedBookDto.getTitle());
         book.setAuthor(updatedBookDto.getAuthor());
@@ -34,7 +34,7 @@ public class BookService {
         return bookMapper.bookToBookDto(book);
     }
 
-    public void deleteBook(Long id) {
+    public void deleteBook(String id) {
         BookModel book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("There is no book with id=" + id));
         bookRepository.delete(book);
     }

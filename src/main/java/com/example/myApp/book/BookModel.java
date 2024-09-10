@@ -1,17 +1,16 @@
 package com.example.myApp.book;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "books")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "books")
 public class BookModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String title;
     private String author;
 }
