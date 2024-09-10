@@ -24,8 +24,8 @@ public class CommentController {
     }
 
     @PostMapping
-    public CommentDto createComment (@RequestBody CommentDto commentDto) {
-        return commentService.createComment(commentDto);
+    public CommentDto createComment (@RequestBody CommentDto commentDto, Long bookId) {
+        return commentService.createComment(commentDto, bookId);
     }
 
     @PutMapping("/{id}")
